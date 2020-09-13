@@ -1,0 +1,29 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "attach",
+        "name": "Docker: Attach to Node",
+        "port": 9229,
+        "address": "localhost",
+        "localRoot": "${workspaceFolder}",
+        "remoteRoot": "/usr/local/src/app",
+        "protocol": "inspector"
+      },
+      {
+        "type": "node",
+        "request": "attach",
+        "name": "Docker: Attach to Node for api-plugin-es-catalog-sync",
+        "port": 9229,
+        "address": "localhost",
+        "localRoot": "/data/gitrepo2/reaction-development-platform/api-plugins/api-plugin-es-catalog-sync/src",
+        "remoteRoot": "/usr/local/src/app/node_modules/@bls/api-plugin-es-catalog-sync",
+        "protocol": "inspector"
+      }
+      
+    ]
+  }

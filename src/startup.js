@@ -1,34 +1,24 @@
 import Logger from "@reactioncommerce/logger";
 import pkg from "../package.json";
+import AppSearchClient from "@elastic/app-search-node";
+import xformToAppSearchDocument from "./xforms/xformToAppSearchDocument";
 
 const logCtx = { name: pkg.name, file: "startup" };
 
-/**
- * @param {Object[]} catalogProductVariants The `product.variants` array from a catalog item
- * @returns {Object[]} All variants and their options flattened in one array
- */
-function getFlatVariantsAndOptions(catalogProductVariants) {
-  const variants = [];
-
-  catalogProductVariants.forEach((variant) => {
-    variants.push(variant);
-    if (variant.options) {
-      variant.options.forEach((option) => {
-        variants.push(option);
-      });
-    }
-  });
-
-  return variants;
-}
 
 /**
  * 
+ * @param {Object} client The AppSearchClient object.
  * @param {Object} catalogProduct The 'catalog' object.
  * @param {Object[]} variantsAndOptions The flattened 'product.variants' and 'product.variants.options'.
  */
-function indexCatalogProduct(catalogProduct, variantsAndOptions) {
-
+function indexCatalogProduct(client, catalogProduct, variantsAndOptions) {
+  //todo: refactor into per Shop configuration
+  const engineName = "applianceshack-part-catalog"
+  const appSearchDoc = xformToAppSearchDocument(catalogProduct);
+  client.indexDocuments(engineName, appSearchDoc)
+    .then(response => Logger.info({ ...logCtx, catalogProductId: catalogProduct._id, fn: "indexCatalogProduct", response }, "Indexed catalog product"))
+    .catch(error => Logger.error({ ...logCtx, catalogProductId: catalogProduct._id, fn: "indexCatalogProduct", error }, "Failed to index catalog product"))
 }
 
 /**
@@ -37,20 +27,21 @@ function indexCatalogProduct(catalogProduct, variantsAndOptions) {
  * @param {Object} context.collections Map of MongoDB collections
  * @returns {undefined}
  */
-export default async function esCatalogSyncStartup(context) {
+export default async function esCatalogProductSyncStartup(context) {
   const { appEvents, collections } = context;
   const { Cart } = collections;
+
+  //todo: refactor into per Shop configuration
+  const apiKey = 'private-9v8a1bkyak7kxhrcnvf6pnuk'
+  const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
+  const client = new AppSearchClient(undefined, apiKey, baseUrlFn)
 
   // Index the published catalog
   appEvents.on("afterPublishProductToCatalog", async ({ catalogProduct }) => {
     const { _id: catalogProductId, variants } = catalogProduct;
 
-    Logger.debug({ ...logCtx, catalogProductId, fn: "startup" }, "Running afterPublishProductToCatalog");
+    Logger.info({ ...logCtx, catalogProductId, fn: "startup" }, "Running afterPublishProductToCatalog");
 
-    const variantsAndOptions = getFlatVariantsAndOptions(variants);
-
-    // Update all cart items that are linked with the updated variants.
-    // await Promise.all(variantsAndOptions.map((variant) => updateAllCartsForVariant({ Cart, context, variant })));
-    await indexCatalogProduct(catalogProduct, variantsAndOptions);
+    await indexCatalogProduct(client, catalogProduct);
   });
 }
