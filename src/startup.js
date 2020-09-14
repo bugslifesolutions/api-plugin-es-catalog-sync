@@ -1,7 +1,7 @@
 import Logger from "@reactioncommerce/logger";
 import pkg from "../package.json";
 import AppSearchClient from "@elastic/app-search-node";
-import xformToAppSearchDocument from "./xforms/xformToAppSearchDocument";
+import xformToAppSearchDocument from "./xforms/xformToAppSearchDocument.js";
 
 const logCtx = { name: pkg.name, file: "startup" };
 
@@ -33,7 +33,7 @@ export default async function esCatalogProductSyncStartup(context) {
 
   //todo: refactor into per Shop configuration
   const apiKey = 'private-9v8a1bkyak7kxhrcnvf6pnuk'
-  const baseUrlFn = () => 'http://localhost:3002/api/as/v1/'
+  const baseUrlFn = () => 'http://search:3002/api/as/v1/'
   const client = new AppSearchClient(undefined, apiKey, baseUrlFn)
 
   // Index the published catalog
