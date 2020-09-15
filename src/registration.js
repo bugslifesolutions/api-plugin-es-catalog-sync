@@ -7,13 +7,20 @@
  * as the app is starting.
  */
 
+/**
+ * Key identifies the type of Object
+ * Value is a list of tranform functions that will be called receives the source object and returns the transformed object (sourceObject) => (transformedObject)
+ * The transformed object will be assigned to the target object.
+ */
 export const customTransforms = {};
-export const customTransformEntries = [];
 
 export default function registerPluginHandler( { appSearch } ) {
     if (appSearch) {
         const { transforms } = appSearch;
-        Object.assign(customTransforms, ...transforms);
-        customTransformsEntries.push(...transforms);
+        const mergedTransforms = Object.fromEntries(Object.entries(transforms)
+            .map( ([key, transformList]) => [key, [...(customTransforms[key]) || [], ...transformList]] )
+        )
+        Object.assign(customTransforms, mergedTransforms);
+              
     }
 }

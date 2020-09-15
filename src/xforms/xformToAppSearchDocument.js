@@ -1,14 +1,24 @@
 import { customTransforms } from "../registration.js";
 import _ from "lodash";
 
-
-const catalogTransforms = {
-  "id": (cp) => (cp._id),
-  "page_title": (cp) => (cp.pageTitle),
-  "created_at": (cp) => (cp.createdAt)
+function catalogTransform (catalogProduct) {
+  const thumbnail = catalogProduct.primaryImage && catalogProduct.primaryImage.URLs && catalogProduct.primaryImage.URLs.thumbnail
+  return {
+    "id": catalogProduct._id,
+    "page_title": catalogProduct.pageTitle,
+    "created_at": catalogProduct.createdAt,
+    "description": catalogProduct.description,
+    "title": catalogProduct.title,
+    "slug": catalogProduct.slug,
+    "sku": catalogProduct.sku,
+    "product_id": catalogProduct.productId,
+    "primary_image_thumbnail_url": thumbnail,
+    "tag_name": catalogProduct.tags && catalogProduct.tags.map((tag)=>tag.displayTitle)
+  }
 }
+
 const defaultTransforms = {
-  catalog: catalogTransforms
+  catalog: [catalogTransform]
 }
 
 const exampleCatalogProduct = {
@@ -118,19 +128,16 @@ const exampleCatalogProduct = {
 }
 
 function effectiveTransforms(type) {
-  const custom = customTransforms[type]
-  const def = defaultTransforms[type]
-  return Object.assign({}, def, custom);
+  const custom = customTransforms[type] || []
+  const def = defaultTransforms[type] || []
+  return [...def, ...custom];
 }
 
 export default function xformFor(type) {
   const transforms = effectiveTransforms(type);
   if (!transforms) return (o) => (o);
   return (sourceObject) => {
-    const indexDoc = Object.fromEntries(
-      Object.entries(transforms)
-      .map(([key, transform]) => [key, transform(sourceObject)])
-    )
+    const indexDoc = Object.assign({}, ...(transforms.map((transform) => transform(sourceObject))))
     return indexDoc
   }
 }

@@ -7,15 +7,11 @@ const logCtx = { name: pkg.name, file: "startup" };
 
 
 /**
- * 
- * @param {Object} client The AppSearchClient object.
- * @param {Object} catalogProduct The 'catalog' object.
- * @param {Object[]} variantsAndOptions The flattened 'product.variants' and 'product.variants.options'.
+ * @summary Responsible for transforming and sending the resulting document for indexing.
+ * @param {string} engineName Name of Elasticsearch App Search 'engine'
+ * @param {string} sourceObjectType Object type being indexed for App Search
+ * @returns {function name(esClient, sourceObject) { }}
  */
-function indexCatalogProduct(client, catalogProduct, variantsAndOptions) {
-
-}
-
 function indexSyncFor(engineName, sourceObjectType) {
   return (esClient, sourceObject) => {
     const appSearchDoc = xformFor(sourceObjectType)(sourceObject);
@@ -43,10 +39,14 @@ export default async function esCatalogProductSyncStartup(context) {
 
   // Index the published catalog
   appEvents.on("afterPublishProductToCatalog", async ({ catalogProduct }) => {
-    const { _id: catalogProductId, variants } = catalogProduct;
+    const { _id: catalogProductId, tagIds, variants } = catalogProduct;
 
     Logger.info({ ...logCtx, catalogProductId, fn: "startup" }, "Running afterPublishProductToCatalog");
 
+    if (tagIds) {
+      const cursor = await context.queries.tagsByIds(context, tagIds);
+      catalogProduct.tags = await cursor.toArray();
+    }
     await indexSyncFor("applianceshack-part-catalog","catalog")(esClient, catalogProduct);
   });
 }
