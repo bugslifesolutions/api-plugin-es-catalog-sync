@@ -7,13 +7,13 @@
  * as the app is starting.
  */
 
-export const customCatalogFieldsToIndex = [];
+export const customTransforms = {};
+export const customTransformEntries = [];
 
-export default function registerPluginHandler( { catalogIndex } ) {
-    if (catalogIndex) {
-        const { catalogFieldsToIndex } = catalogIndex;
-        if (Array.isArray(catalogFieldsToIndex)) {
-            customCatalogFieldsToIndex.push(...catalogFieldsToIndex);
-        }
+export default function registerPluginHandler( { appSearch } ) {
+    if (appSearch) {
+        const { transforms } = appSearch;
+        Object.assign(customTransforms, ...transforms);
+        customTransformsEntries.push(...transforms);
     }
 }
