@@ -2,6 +2,7 @@ import Logger from "@reactioncommerce/logger";
 import pkg from "../package.json";
 import AppSearchClient from "@elastic/app-search-node";
 import xformFor from "./xforms/xformToAppSearchDocument.js";
+import config from "./config";
 
 const logCtx = { name: pkg.name, file: "startup" };
 
@@ -31,11 +32,7 @@ export default async function esCatalogProductSyncStartup(context) {
   const { appEvents, collections } = context;
   const { Cart } = collections;
 
-  //todo: operational issue
-  // - feature - the plugin is configurable via Environment settings
-  const apiKey = 'private-9v8a1bkyak7kxhrcnvf6pnuk'
-  const baseUrlFn = () => 'http://search:3002/api/as/v1/'
-  const esClient = new AppSearchClient(undefined, apiKey, baseUrlFn)
+  const esClient = new AppSearchClient(undefined, config.key, () => config.url)
 
   // Index the published catalog
   appEvents.on("afterPublishProductToCatalog", async ({ catalogProduct }) => {
