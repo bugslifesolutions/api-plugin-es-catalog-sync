@@ -84,7 +84,7 @@
   },
   "release": {
     "branches": [
-      "trunk"
+      "main"
     ]
   },
   "publishConfig": {
