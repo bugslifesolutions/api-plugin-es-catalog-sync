@@ -1,5 +1,5 @@
 {
-  "name": "@bugsLifeSolutions/api-plugin-es-catalog-sync",
+  "name": "@bugslifesolutions/api-plugin-es-catalog-sync",
   "description": "Reaction API Plugin for Elastic Search Catalog synchronization",
   "version": "0.0.1-alpha",
   "main": "index.js",
