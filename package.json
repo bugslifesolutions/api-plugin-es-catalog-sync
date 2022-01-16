@@ -1,18 +1,18 @@
 {
-  "name": "@bls/api-plugin-es-catalog-sync",
+  "name": "@bugsLifeSolutions/api-plugin-es-catalog-sync",
   "description": "Reaction API Plugin for Elastic Search Catalog synchronization",
-  "version": "0.0.0-development",
+  "version": "0.0.1-alpha",
   "main": "index.js",
   "type": "module",
   "engines": {
-    "node": ">=12.14.1"
+    "node": ">=14.18.0"
   },
-  "homepage": "https://bitbucket.org/BugsLifeSolutions/api-plugin-es-catalog-sync",
-  "url": "https://bitbucket.org/BugsLifeSolutions/api-plugin-es-catalog-sync",
+  "homepage": "https://github.com/bugslifesolutions/api-plugin-es-catalog-sync",
+  "url": "https://github.com/bugslifesolutions/api-plugin-es-catalog-sync",
   "email": "engineering@bugslifesolutions.com",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:BugsLifeSolutions/api-plugin-es-catalog-sync.git"
+    "url": "git@github.com:bugslifesolutions/api-plugin-es-catalog-sync.git"
   },
   "author": {
     "name": "Bugslife Solutions",
@@ -21,7 +21,7 @@
   },
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://bitbucket.org/BugsLifeSolutions/api-plugin-es-catalog-sync/issues"
+    "url": "https://github.com/bugslifesolutions/api-plugin-es-catalog-sync/issues"
   },
   "sideEffects": false,
   "dependencies": {

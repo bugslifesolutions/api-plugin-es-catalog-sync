@@ -1,5 +1,5 @@
 module.exports = {
-  extends: "@bls",
+  extends: "@bugslifesolutions",
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: "module",

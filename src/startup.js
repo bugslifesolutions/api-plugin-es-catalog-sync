@@ -32,7 +32,7 @@ export default async function esCatalogProductSyncStartup(context) {
   const { appEvents, collections } = context;
   const { Cart } = collections;
 
-  const esClient = new AppSearchClient(undefined, config.key, () => config.url)
+  const esClient = new AppSearchClient(accountHostKey=undefined, apiKey=config.key, baseUrlFn= (accountHostKey) => config.url)
 
   // Index the published catalog
   appEvents.on("afterPublishProductToCatalog", async ({ catalogProduct }) => {

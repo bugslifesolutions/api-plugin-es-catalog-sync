@@ -21,7 +21,7 @@
         "port": 9229,
         "address": "localhost",
         "localRoot": "/data/gitrepo2/reaction-development-platform/api-plugins/api-plugin-es-catalog-sync/src",
-        "remoteRoot": "/usr/local/src/app/node_modules/@bls/api-plugin-es-catalog-sync",
+        "remoteRoot": "/usr/local/src/app/node_modules/@bugslifesolutions/api-plugin-es-catalog-sync",
         "protocol": "inspector"
       }
       
