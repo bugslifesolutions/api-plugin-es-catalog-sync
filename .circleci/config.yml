@@ -82,4 +82,6 @@ workflows:
             - test
           filters:
             branches:
-              only: trunk
+              only: 
+                - trunk
+                - main
