@@ -17,6 +17,6 @@ export default async function register(app) {
       registerPluginHandler: [registerPluginHandler],
       startup: [startup]
     },
-    policies,
+    policies
   });
 }

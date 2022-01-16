@@ -1,26 +1,37 @@
 import { customTransforms } from "../registration.js";
-import _ from "lodash";
 
-function catalogTransform (catalogProduct) {
-  const thumbnail = catalogProduct.primaryImage && catalogProduct.primaryImage.URLs && catalogProduct.primaryImage.URLs.thumbnail
+/**
+ *
+ * @param {object} catalogProduct An instance of a Catalog product object.
+ * @returns {object} transformed catalog product object
+ */
+function catalogTransform(catalogProduct) {
+  const thumbnail = catalogProduct.primaryImage && catalogProduct.primaryImage.URLs && catalogProduct.primaryImage.URLs.thumbnail;
+  //
   return {
-    "id": catalogProduct._id,
-    "page_title": catalogProduct.pageTitle,
-    "created_at": catalogProduct.createdAt,
-    "description": catalogProduct.description,
-    "title": catalogProduct.title,
-    "slug": catalogProduct.slug,
-    "sku": catalogProduct.sku,
-    "product_id": catalogProduct.productId,
-    "primary_image_thumbnail_url": thumbnail,
-    "tag_name": catalogProduct.tags && catalogProduct.tags.map((tag)=>tag.displayTitle)
-  }
+    id: catalogProduct._id,
+    // eslint-disable-next-line camelcase
+    page_title: catalogProduct.pageTitle,
+    // eslint-disable-next-line camelcase
+    created_at: catalogProduct.createdAt,
+    description: catalogProduct.description,
+    title: catalogProduct.title,
+    slug: catalogProduct.slug,
+    sku: catalogProduct.sku,
+    // eslint-disable-next-line camelcase
+    product_id: catalogProduct.productId,
+    // eslint-disable-next-line camelcase
+    primary_image_thumbnail_url: thumbnail,
+    // eslint-disable-next-line camelcase
+    tag_name: catalogProduct.tags && catalogProduct.tags.map((tag) => tag.displayTitle)
+  };
 }
 
 const defaultTransforms = {
   catalog: [catalogTransform]
-}
+};
 
+// eslint-disable-next-line no-unused-vars
 const exampleCatalogProduct = {
   _id: "QW6RmogjsvEx6RdB2",
   barcode: undefined,
@@ -47,23 +58,23 @@ const exampleCatalogProduct = {
   socialMetadata: [
     {
       service: "twitter",
-      message: undefined,
+      message: undefined
     },
     {
       service: "facebook",
-      message: undefined,
+      message: undefined
     },
     {
       service: "googleplus",
-      message: undefined,
+      message: undefined
     },
     {
       service: "pinterest",
-      message: undefined,
-    },
+      message: undefined
+    }
   ],
   supportedFulfillmentTypes: [
-    "shipping",
+    "shipping"
   ],
   tagIds: undefined,
   title: "Door Cam",
@@ -101,14 +112,14 @@ const exampleCatalogProduct = {
           displayPrice: "$94,000.00",
           maxPrice: 94000,
           minPrice: 94000,
-          price: 94000,
-        },
+          price: 94000
+        }
       },
       isSoldOut: false,
       isTaxable: true,
       taxCode: undefined,
-      taxDescription: undefined,
-    },
+      taxDescription: undefined
+    }
   ],
   vendor: null,
   weight: undefined,
@@ -119,25 +130,33 @@ const exampleCatalogProduct = {
       displayPrice: "$94,000.00",
       maxPrice: 94000,
       minPrice: 94000,
-      price: null,
-    },
+      price: null
+    }
   },
   isBackorder: false,
   isLowQuantity: false,
-  isSoldOut: false,
-}
+  isSoldOut: false
+};
 
+/**
+ * @param {string} type The name/label identifying the desired set of transforms
+ * @returns {[]} the set of effective transformation functions
+ */
 function effectiveTransforms(type) {
-  const custom = customTransforms[type] || []
-  const def = defaultTransforms[type] || []
+  const custom = customTransforms[type] || [];
+  const def = defaultTransforms[type] || [];
   return [...def, ...custom];
 }
 
+/**
+ * @param {string} type The name/label identifying the desired transformation function
+ * @returns {function} A function that takes a sourceObject and returns a transformedObject.
+ */
 export default function xformFor(type) {
   const transforms = effectiveTransforms(type);
-  if (!transforms) return (o) => (o);
+  if (!transforms) return (sourceObject) => (sourceObject);
   return (sourceObject) => {
-    const indexDoc = Object.assign({}, ...(transforms.map((transform) => transform(sourceObject))))
-    return indexDoc
-  }
+    const transformedObject = Object.assign({}, ...(transforms.map((transform) => transform(sourceObject))));
+    return transformedObject;
+  };
 }

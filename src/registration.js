@@ -1,8 +1,8 @@
 /**
- * A registerPluginHandler function may NOT return a Promise. 
- * If you need to do something async with the data, just save it off for now. 
- * Then create and register a startup type function, which imports the data 
- * you saved off, does the async tasks, and returns a Promise. 
+ * A registerPluginHandler function may NOT return a Promise.
+ * If you need to do something async with the data, just save it off for now.
+ * Then create and register a startup type function, which imports the data
+ * you saved off, does the async tasks, and returns a Promise.
  * Startup functions are called immediately after registerPluginHandler functions
  * as the app is starting.
  */
@@ -14,13 +14,16 @@
  */
 export const customTransforms = {};
 
-export default function registerPluginHandler( { appSearch } ) {
-    if (appSearch) {
-        const { transforms } = appSearch;
-        const mergedTransforms = Object.fromEntries(Object.entries(transforms)
-            .map( ([key, transformList]) => [key, [...(customTransforms[key]) || [], ...transformList]] )
-        )
-        Object.assign(customTransforms, mergedTransforms);
-              
-    }
+/**
+ * Initializes the shared customTransforms using the provided appSearch.tranforms.
+ * @param {object} appSearch The appSearch object configuration.
+ * @returns {void}
+ */
+export default function registerPluginHandler({ appSearch }) {
+  if (appSearch) {
+    const { transforms } = appSearch;
+    const mergedTransforms = Object.fromEntries(Object.entries(transforms)
+      .map(([key, transformList]) => [key, [...(customTransforms[key]) || [], ...transformList]]));
+    Object.assign(customTransforms, mergedTransforms);
+  }
 }
