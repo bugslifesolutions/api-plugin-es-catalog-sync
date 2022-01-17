@@ -1,10 +1,10 @@
-import { str, url, cleanEnv } from "envalid";
+import { str, url, cleanEnv, testOnly } from "envalid";
 import Logger from "@reactioncommerce/logger";
 
 const config = cleanEnv(process.env, {
-  ES_CATALOG_SYNC_ENTERPRISESEARCH_URL: url({ desc: "URL of Enterprise Search", required: false }),
-  ES_CATALOG_SYNC_ENTERPRISESEARCH_KEY: str({ desc: "Secret Key with permission to put documents", required: false }),
-  ES_CATALOG_SYNC_ENTERPRISESEARCH_ENGINE_NAME: str({ desc: "The 'catalog' Enterprise Search engineName", required: false })
+  ES_CATALOG_SYNC_ENTERPRISESEARCH_URL: url({ desc: "EnterpriseSearch URL", required: true, devDefault: testOnly("http://localhost:28888/api/v1/") }),
+  ES_CATALOG_SYNC_ENTERPRISESEARCH_KEY: str({ desc: "EnterpriseSearch Key", required: true, devDefault: testOnly("EnterpriseSearchKey") }),
+  ES_CATALOG_SYNC_ENTERPRISESEARCH_ENGINE_NAME: str({ desc: "EnterpriseSearch Engine Name", default: "catalog" })
 }, {
   dotEnvPath: null
 });
