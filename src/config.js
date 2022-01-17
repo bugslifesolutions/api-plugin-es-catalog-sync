@@ -2,9 +2,9 @@ import { str, url, cleanEnv } from "envalid";
 import Logger from "@reactioncommerce/logger";
 
 const config = cleanEnv(process.env, {
-  ES_CATALOG_SYNC_ENTERPRISESEARCH_URL: url({ desc: "URL of Enterprise Search", required: true }),
-  ES_CATALOG_SYNC_ENTERPRISESEARCH_KEY: str({ desc: "Secret Key with permission to put documents", required: true }),
-  ES_CATALOG_SYNC_ENTERPRISESEARCH_CATALOG_ENGINE_NAME: str({ desc: "The 'catalog' Enterprise Search engineName", required: true })
+  ES_CATALOG_SYNC_ENTERPRISESEARCH_URL: url({ desc: "URL of Enterprise Search", required: false }),
+  ES_CATALOG_SYNC_ENTERPRISESEARCH_KEY: str({ desc: "Secret Key with permission to put documents", required: false }),
+  ES_CATALOG_SYNC_ENTERPRISESEARCH_CATALOG_ENGINE_NAME: str({ desc: "The 'catalog' Enterprise Search engineName", required: false })
 }, {
   dotEnvPath: null
 });
