@@ -12,7 +12,7 @@
   "email": "engineering@bugslifesolutions.com",
   "repository": {
     "type": "git",
-    "url": "git@github.com:bugslifesolutions/api-plugin-es-catalog-sync.git"
+    "url": "https://github.com/bugslifesolutions/api-plugin-es-catalog-sync.git"
   },
   "author": {
     "name": "Bugslife Solutions",
@@ -34,7 +34,8 @@
     "envalid": "^7.2.2",
     "graphql": "^15.5.3",
     "lodash": "^4.17.21",
-    "simpl-schema": "^1.12.0"
+    "simpl-schema": "^1.12.0",
+    "typescript": "^5.0.4"
   },
   "devDependencies": {
     "@babel/core": "~7.16.7",
