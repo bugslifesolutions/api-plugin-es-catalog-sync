@@ -5,8 +5,8 @@ import registerPluginHandler from "./registration.js";
 
 /** todo: refactor to make easier to add watching and indexing other collections.
  * maybe add a graphQL resolver with a mutation for a 'watch and index' responsibility; 'IndexSynchronizer' 'ListeningElasticIndexer' 'EventStash'.
- * EventStash - 
- * { 
+ * EventStash -
+ * {
  *   reaction_event_name: 'afterPublishProductToCatalog',
  *   documentTransform: function(context, document) returns object
  *   stash: function(document)
