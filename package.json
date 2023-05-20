@@ -12,7 +12,7 @@
   "email": "engineering@bugslifesolutions.com",
   "repository": {
     "type": "git",
-    "url": "git@github.com:bugslifesolutions/api-plugin-es-catalog-sync.git"
+    "url": "https://github.com/bugslifesolutions/api-plugin-es-catalog-sync.git"
   },
   "author": {
     "name": "Bugslife Solutions",
