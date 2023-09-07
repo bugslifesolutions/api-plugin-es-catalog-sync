@@ -15,7 +15,7 @@
 export const customTransforms = {};
 
 const mergeEntries = ([key, transformsForKeyTypedObject]) => {
-  const transforms = Array.isArray(transformsForKeyTypedObject) ? transformsForKeyTypedObject : new Array(transformsForKeyTypedObject)
+  const transforms = Array.isArray(transformsForKeyTypedObject) ? transformsForKeyTypedObject : new Array(transformsForKeyTypedObject);
   return [key, [...(customTransforms[key]) || [], ...transforms]];
 };
 
