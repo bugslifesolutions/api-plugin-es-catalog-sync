@@ -1,6 +1,6 @@
 import Logger from "@reactioncommerce/logger";
 import AppSearchClient from "@elastic/app-search-node";
-import pkg from "../package.json";
+import pkg from "../package.json" assert { type: "json"};
 import xformFor from "./xforms/xformToAppSearchDocument.js";
 import config from "./config";
 

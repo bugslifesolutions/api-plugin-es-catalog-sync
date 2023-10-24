@@ -1,4 +1,4 @@
-import pkg from "../package.json";
+import pkg from "../package.json" assert { type: "json"};
 import policies from "./policies.json";
 import startup from "./startup.js";
 import registerPluginHandler from "./registration.js";
