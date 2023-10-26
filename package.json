@@ -47,6 +47,7 @@
     "babel-plugin-rewire-exports": "~2.3.0",
     "babel-plugin-transform-es2015-modules-commonjs": "~6.26.2",
     "babel-plugin-transform-import-meta": "~1.0.1",
+    "eslint": "^8.52.0",
     "husky": "^4.3.8",
     "jest": "~27.4.7",
     "semantic-release": "^22.0.5"
