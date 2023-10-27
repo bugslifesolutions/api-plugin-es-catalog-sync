@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@babel/eslint-parser': ^7.22.15
   '@babel/plugin-syntax-import-assertions': ^7.22.5
+  '@babel/preset-env': ^7.23.2
   '@commitlint/cli': ^18.0.0
   '@commitlint/config-conventional': ^18.0.0
   '@elastic/app-search-node': ^7.17.0
@@ -41,6 +42,7 @@ dependencies:
 devDependencies:
   '@babel/eslint-parser': 7.22.15_ah26r3sjjcwu66nqedyygiotii
   '@babel/plugin-syntax-import-assertions': 7.22.5_@babel+core@7.23.2
+  '@babel/preset-env': 7.23.2_@babel+core@7.23.2
   '@commitlint/cli': 18.1.0
   '@commitlint/config-conventional': 18.1.0
   '@reactioncommerce/babel-remove-es-create-require': 1.0.0_@babel+core@7.23.2

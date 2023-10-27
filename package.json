@@ -39,6 +39,7 @@
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
     "@babel/plugin-syntax-import-assertions": "^7.22.5",
+    "@babel/preset-env": "^7.23.2",
     "@commitlint/cli": "^18.0.0",
     "@commitlint/config-conventional": "^18.0.0",
     "@reactioncommerce/babel-remove-es-create-require": "~1.0.0",
