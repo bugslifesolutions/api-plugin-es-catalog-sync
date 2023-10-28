@@ -1,0 +1,4 @@
+{
+    "jest.jestCommandLine": "nvs exec 18.18.2 npm test --",
+    "jest.rootPath": "."
+}

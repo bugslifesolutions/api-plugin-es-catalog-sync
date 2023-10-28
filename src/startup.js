@@ -2,7 +2,7 @@ import Logger from "@reactioncommerce/logger";
 import AppSearchClient from "@elastic/app-search-node";
 import pkg from "../package.json" assert { type: "json"};
 import xformFor from "./xforms/xformToAppSearchDocument.js";
-import config from "./config";
+import config from "./config.js";
 
 const logCtx = { name: pkg.name, file: "startup" };
 

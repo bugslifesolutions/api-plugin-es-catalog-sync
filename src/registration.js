@@ -8,22 +8,27 @@
  */
 
 /**
- * Key identifies the type of Object
- * Value is a list of tranform functions that will be called receives the source object and returns the transformed object (sourceObject) => (transformedObject)
- * The transformed object will be assigned to the target object.
+ * The properties/entries of the customTransforms have the following semantics:
+ * - property Name/Key identifies the type of Object the Value should be applied to.
+ * - property Value is a list of transform functions that will be called with the source object and returns the transformed object (sourceObject) => (transformedObject)
  */
 export const customTransforms = {};
 
+const mergeEntries = ([key, transformsForKeyTypedObject]) => {
+  const transforms = Array.isArray(transformsForKeyTypedObject) ? transformsForKeyTypedObject : new Array(transformsForKeyTypedObject);
+  return [key, [...(customTransforms[key]) || [], ...transforms]];
+};
+
 /**
- * Initializes the shared customTransforms using the provided appSearch.tranforms.
+ * Merges the provided appSearch.transforms with the global customTransforms.
  * @param {object} appSearch The appSearch object configuration.
  * @returns {void}
  */
 export default function registerPluginHandler({ appSearch }) {
   if (appSearch) {
     const { transforms } = appSearch;
-    const mergedTransforms = Object.fromEntries(Object.entries(transforms)
-      .map(([key, transformList]) => [key, [...(customTransforms[key]) || [], ...transformList]]));
+    const mergedEntries = Object.entries(transforms).map(mergeEntries);
+    const mergedTransforms = Object.fromEntries(mergedEntries);
     Object.assign(customTransforms, mergedTransforms);
   }
 }
