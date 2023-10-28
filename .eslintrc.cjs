@@ -16,7 +16,8 @@ module.exports = {
   },
   env: {
     es6: true,
-    jasmine: true
+    jasmine: true,
+    jest: true
   },
   globals: {
     process: true
