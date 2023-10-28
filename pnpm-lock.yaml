@@ -26,6 +26,7 @@ specifiers:
   lodash: ^4.17.21
   semantic-release: ^22.0.5
   simpl-schema: ^1.13.1
+  typescript: ^5.0.4
 
 dependencies:
   '@elastic/app-search-node': 7.17.0
@@ -38,6 +39,7 @@ dependencies:
   graphql: 15.8.0
   lodash: 4.17.21
   simpl-schema: 1.13.1
+  typescript: 5.2.2
 
 devDependencies:
   '@babel/eslint-parser': 7.22.15_ah26r3sjjcwu66nqedyygiotii
@@ -7642,7 +7644,6 @@ packages:
     resolution: {integrity: sha512-mI4WrpHsbCIcwT9cF4FZvr80QUeKvsUsUvKDoR+X/7XHQH98xYD8YHZg7ANtz2GtZt/CBq2QJ0thkGJMHfqc1w==}
     engines: {node: '>=14.17'}
     hasBin: true
-    dev: true
 
   /uglify-js/3.17.4:
     resolution: {integrity: sha512-T9q82TJI9e/C1TAxYvfb16xO120tMVFZrGA3f9/P4424DNu6ypK103y0GPFVa17yotwSyZW5iYXgjYHkGrJW/g==}
