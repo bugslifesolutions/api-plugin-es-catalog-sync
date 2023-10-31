@@ -1,5 +1,5 @@
-import decodeOpaqueIdForNamespace from "@reactioncommerce/api-utils/decodeOpaqueIdForNamespace.js";
-import encodeOpaqueId from "@reactioncommerce/api-utils/encodeOpaqueId.js";
+import decodeOpaqueIdForNamespace from "@bugslifesolutions/api-utils/decodeOpaqueIdForNamespace.js";
+import encodeOpaqueId from "@bugslifesolutions/api-utils/encodeOpaqueId.js";
 
 const namespaces = {
   Product: "reaction/product",
